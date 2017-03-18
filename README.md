@@ -1,1 +1,1 @@
-# lumen-book
+# Lumen Book API application
