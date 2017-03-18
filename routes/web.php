@@ -42,5 +42,7 @@ $app->get('/response', function(Illuminate\Http\Request $request) {
 		->make('Hello stranger', 200, ['Content-Type' => 'text/plain']);
 });
 
+$app->get('/books', 'BooksController@index');
+
 // curl -I -XPOST http://lumen-book.local/hello/world
 // curl -i -H "Accept:application/json" http://lumen-book.local/response
