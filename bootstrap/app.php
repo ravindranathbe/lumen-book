@@ -25,7 +25,7 @@ $app = new Laravel\Lumen\Application(
 
 $app->withFacades();
 
-// $app->withEloquent();
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +69,14 @@ $app->singleton(
 
 $app->middleware([
     App\Http\Middleware\RequestLogMiddleware::class
+]);
+
+/* $app->middleware([
+    App\Http\Middleware\HelloMiddleware::class
+]); */
+
+ $app->routeMiddleware([
+    'hello' => App\Http\Middleware\HelloMiddleware::class,
 ]);
 
 /*
