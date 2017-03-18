@@ -14,3 +14,15 @@
 $app->get('/', function () use ($app) {
     return $app->version();
 });
+
+$app->get('/hello/world', function() use ($app) {
+	return "Hello world!";
+});
+
+$app->get('/hello/{name}', function($name) use ($app) {
+	return "Hello ".$name;
+});
+
+
+
+// curl -I -XPOST http://lumen-book.local/hello/world
