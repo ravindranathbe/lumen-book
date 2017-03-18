@@ -6,6 +6,9 @@ class BooksController
 {
     public function index()
     {
-        return [];
+        return [
+            ['title' => 'War of the worlds'],
+            ['title' => 'Lolita love']
+        ];
     }
 }

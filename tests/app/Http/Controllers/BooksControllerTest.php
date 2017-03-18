@@ -12,4 +12,16 @@ class BooksControllerTest extends TestCase
     {
         $this->get('/books')->seeStatusCode(200);
     }
+
+    public function testIndexShouldReturnACollection()
+    {
+        $this->get('books')
+            ->seeJson([
+                'title' => 'War of the worlds'
+                ])
+            ->seeJson([
+                'title' => 'Lolita love'
+                ])
+            ;
+    }
 }
