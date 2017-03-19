@@ -15,17 +15,17 @@ class BooksControllerTest extends TestCase
 
     public function testIndexShouldReturnACollection()
     {
-        /*
-        $this->get('books')
+        /* $this->get('books')
             ->seeJson([
                 'title' => 'War of the worlds'
                 ])
             ->seeJson([
                 'title' => 'Lolita love'
                 ])
-            ;
-        */
-        $this->markTestIncomplete('Pending test');
+            ; */
+        // $this->markTestIncomplete('Pending test');
+        $this->get('books')
+            ->isJson();
     }
 
     public function testShowShouldReturnAValidBook()
@@ -39,6 +39,10 @@ class BooksControllerTest extends TestCase
                 // 'description' => 'A science fiction masterpiece about Martians invading London',
                 // 'author' => 'H. G. Wells'
             ]);
+
+        $data = json_decode($this->response->getContent(), true);
+        $this->assertArrayHasKey('created_at', $data);
+        $this->assertArrayHasKey('updated_at', $data);
     }
 
     public function testShowShouldFailWhenTheBookIdDoesNotExist()
@@ -51,5 +55,16 @@ class BooksControllerTest extends TestCase
                     'message' => 'Book not found'
                 ]
             ]);
+    }
+
+    public function testShowRouteShouldNotMatchAnInvalidRoute()
+    {
+        $this->get('/books/this-is-invalid');
+
+        $this->assertNotRegExp(
+            '/Book not found/',
+            $this->response->getContent(),
+            'BooksController@show route matching when it should not.'
+        );
     }
 }
