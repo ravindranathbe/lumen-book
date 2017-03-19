@@ -43,8 +43,13 @@ $app->get('/response', function(Illuminate\Http\Request $request) {
 });
 
 $app->get('/books', 'BooksController@index');
-$app->get('/books/{id}', 'BooksController@show');
+$app->get('/books/{id:[\d]+}', [
+		'as' => 'books.show',
+		'uses' => 'BooksController@show'
+	]);
 $app->post('/books', 'BooksController@store');
+$app->put('/books/{id:[\d]+}', 'BooksController@update');
+$app->delete('/books/{id:[\d]+}', 'BooksController@destroy');
 
 // curl -I -XPOST http://lumen-book.local/hello/world
 // curl -i -H "Accept:application/json" http://lumen-book.local/response
